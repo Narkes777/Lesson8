@@ -1,10 +1,16 @@
+import imp
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
 from .models import Ad
 from django.views.generic.edit import CreateView
 from .forms import AdForm
 
+
 # Create your views here.
+
+def search_by_name(request: HttpRequest, name: str) -> HttpResponse:
+    ad = Ad.objects.get(name=name)
+    return HttpResponse(ad.name)
 
 
 class AdCreateView(CreateView):
